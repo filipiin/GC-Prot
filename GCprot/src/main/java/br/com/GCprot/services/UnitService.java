@@ -24,8 +24,6 @@ public class UnitService {
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar usuário para atualizar"));
         unitBank.setStreet(unitUpdated.getStreet());
         unitBank.setSituation(unitUpdated.getSituation());
-        unitBank.setNum(unitUpdated.getNum());
-        unitBank.setBlock(unitUpdated.getBlock());
 
         return unitRepository.save(unitBank);
     }
@@ -44,8 +42,7 @@ public class UnitService {
         return unit;
     }
 
-    public List<Unit> readUnidadeAll() {
+    public List<Unit> readUnitAll() {
         return unitRepository.findAll();
     }
 }
-// A chave extra foi removida

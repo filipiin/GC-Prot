@@ -9,36 +9,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // 1. Avisa ao Spring que esta classe é um Controller REST (vai receber e enviar JSON)
-@RequestMapping("/unidades") // 2. Define a URL base. Todas as operações aqui dentro começarão com http://localhost:8080/unidades
+@RestController
+@RequestMapping("/unit")
 public class UnitController {
 
-    @Autowired //  3. Injeta o "Cérebro" (Service). O Controller SÓ fala com o Service.
+    @Autowired
     private UnitService unitService;
 
-    // --- Endpoint de CRIAÇÃO (Create) ---
-    // HTTP POST -> http://localhost:8080/unidades
     @PostMapping
     public ResponseEntity<Unit> createUnit(@RequestBody Unit unit) {
-        //  @RequestBody: Pega o JSON enviado pelo front-end e transforma no objeto 'Unidade'
         Unit newUnit = unitService.createUnit(unit);
-        //  ResponseEntity: Permite retornar um status HTTP. 201 CREATED é o padrão para criação.
         return new ResponseEntity<>(newUnit, HttpStatus.CREATED);
     }
 
-    // --- Endpoint de LEITURA (Read) - Todos ---
-    // HTTP GET -> http://localhost:8080/unidades
     @GetMapping
-    public ResponseEntity<List<Unit>> searchAllUnits() {
-        List<Unit> unities = unitService.readAllUnits();
+    public ResponseEntity<List<Unit>> readUnitAll() {
+        List<Unit> unities = unitService.readUnitAll();
         return new ResponseEntity<>(unities, HttpStatus.OK); // OK (200)
     }
 
-    // --- Endpoint de LEITURA (Read) - Por ID ---
-    // HTTP GET -> http://localhost:8080/unidades/5 (por exemplo)
     @GetMapping("/{id}")
     public ResponseEntity<Unit> searchUnitById(@PathVariable int id) {
-        //  @PathVariable: Pega o 'id' que veio na URL (o '5' do exemplo) e coloca na variável 'int id'
         Unit unit = unitService.readUnit(id);
         return new ResponseEntity<>(unit, HttpStatus.OK);
     }

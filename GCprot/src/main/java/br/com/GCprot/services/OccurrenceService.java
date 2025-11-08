@@ -19,10 +19,12 @@ public class OccurrenceService {
     }
 
     public Occurrence updateOccurrence(Occurrence occurrenceUpdated) {
-        Occurrence occurrenceBank = occurrenceRepository.findById(occurrenceUpdated.getId())
+        Occurrence occurrence = occurrenceRepository.findById(occurrenceUpdated.getId())
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar usuário para atualizar"));
+        occurrence.setDescription(occurrenceUpdated.getDescription());
+        occurrence.setType(occurrenceUpdated.getType());
 
-        return occurrenceRepository.save(occurrenceBank);
+        return occurrenceRepository.save(occurrence);
     }
 
     @Transactional

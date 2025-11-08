@@ -1,4 +1,4 @@
-package br.com.GCprot;
+package gcprot.br.com.GCprot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
