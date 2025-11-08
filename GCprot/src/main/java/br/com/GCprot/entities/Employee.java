@@ -40,11 +40,11 @@ public class Employee {
          this.function = function;
     }
 
-    public String getDescriptionFunction() {
+    public String getDescription() {
         return descriptionFunction;
     }
 
-    public void setDescriptionFunction(String descriptionFunction) {
+    public void setDescription(String descriptionFunction) {
         this.descriptionFunction = descriptionFunction;
     }
 }
