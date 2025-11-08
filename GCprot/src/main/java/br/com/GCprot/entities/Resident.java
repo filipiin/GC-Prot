@@ -30,10 +30,6 @@ public class Resident {
         return person;
     }
 
-    public void setResident(Person person) {
-        this.person = person;
-    }
-
     public void setPerson(Person person) {
         this.person = person;
     }

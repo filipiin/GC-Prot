@@ -48,7 +48,7 @@ public class Title
     public int getId() {
         return id;
     }
-    public float getvalue(){
+    public float getValue(){
         return value;
     }
     public void setValue(float value){

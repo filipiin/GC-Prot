@@ -16,17 +16,20 @@ public class DependentResident {
 
     @OneToOne
     @JoinColumn(name = "person_id")
+    private Person person;
 
     @ManyToOne
     @JoinColumn(name = "resident_id")
-    private DependentResident dependent;
+    private Resident resident;
 
     public DependentResident() {
     }
 
-    public DependentResident(int id, ClassificationDependent classification) {
+    public DependentResident(int id, Resident resident, Person person, ClassificationDependent classification) {
         this.id = id;
         this.classification = classification;
+        this.resident = resident;
+        this.person = person;
     }
 
     public int getId() {
@@ -37,7 +40,23 @@ public class DependentResident {
         return classification;
     }
 
-    public void setClassificationDependent(ClassificationDependent classification) {
+    public void setClassification(ClassificationDependent classification) {
         this.classification = classification;
+    }
+
+    public Resident getResident() {
+        return resident;
+    }
+
+    public void setResident(Resident resident) {
+        this.resident = resident;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }
