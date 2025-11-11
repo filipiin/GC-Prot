@@ -1,0 +1,10 @@
+CREATE TABLE title (
+  id INT NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+  value FLOAT NOT NULL,
+  vality DATE NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  type VARCHAR(255) NOT NULL,
+  situation VARCHAR(255) NOT NULL,
+  created_at DATETIME,
+  updated_at DATETIME
+);

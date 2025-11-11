@@ -14,7 +14,7 @@ public class OccurrenceService {
     @Autowired
     private OccurrenceRepository occurrenceRepository;
 
-    public Occurrence createoccurrence(Occurrence occurrence) {
+    public Occurrence createOccurrence(Occurrence occurrence) {
         return occurrenceRepository.save(occurrence);
     }
 
@@ -23,6 +23,7 @@ public class OccurrenceService {
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar usuário para atualizar"));
         occurrence.setDescription(occurrenceUpdated.getDescription());
         occurrence.setType(occurrenceUpdated.getType());
+        occurrence.setName(occurrenceUpdated.getName());
 
         return occurrenceRepository.save(occurrence);
     }

@@ -2,6 +2,10 @@ package br.com.GCprot.entities;
 
 import br.com.GCprot.enums.ClassificationDependent;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "dependent_resident")
@@ -21,6 +25,11 @@ public class DependentResident {
     @ManyToOne
     @JoinColumn(name = "resident_id")
     private Resident resident;
+
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
     public DependentResident() {
     }
@@ -43,7 +52,6 @@ public class DependentResident {
     public void setClassification(ClassificationDependent classification) {
         this.classification = classification;
     }
-
     public Resident getResident() {
         return resident;
     }

@@ -1,9 +1,11 @@
 package br.com.GCprot.entities;
 
 import br.com.GCprot.enums.SituationItem;
-import com.fasterxml.jackson.annotation.JsonBackReference; // <-- Importante para Spring Web
 import jakarta.persistence.*;
-import java.time.Instant;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "item_inventory")
@@ -12,34 +14,38 @@ public class ItemInventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String name;
+    private String description;
+    private int quantity;
+    private float value;
+
+    @Enumerated(EnumType.STRING)
+    private SituationItem situation;
+
+    @CreationTimestamp
+    private LocalDateTime created_at;
+
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
     @ManyToOne
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
-    @Enumerated(EnumType.STRING)
-    private SituationItem situation;
-    private String name;
-    private String description;
-    private int quantity;
-    private float value;
-    private Instant createdAt;
-    private Instant updatedAt;
 
 
     public ItemInventory() {
     }
 
 
-    public ItemInventory(int id, String name, String description, int quantity, SituationItem situation, float value) {
+    public ItemInventory(int id, String name, String description, int quantity, SituationItem situation, float value, Inventory inventory) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
         this.value = value;
-        this.createdAt = Instant.now();
-        this.updatedAt = Instant.now();
         this.situation = situation;
+        this.inventory = inventory;
     }
         public int getId () {
             return id;
@@ -85,11 +91,13 @@ public class ItemInventory {
             this.value = value;
         }
 
-        public Instant getUpdatedAt () {
-            return updatedAt;
+        public Inventory getInventory () {
+            return inventory;
         }
 
-        public Instant getCreatedAt () {
-            return createdAt;
+        public void setInventory ( Inventory inventory){
+            this.inventory = inventory;
         }
+
+
 }

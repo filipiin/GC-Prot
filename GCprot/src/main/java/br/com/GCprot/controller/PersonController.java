@@ -25,33 +25,28 @@ public class PersonController {
 
     @PostMapping // 2. Mapeia este metodo para r equisições HTTP POST em /api/pessoas
     public ResponseEntity<Person> createPerson(@RequestBody Person person) {
-        Person newPerson = personService.createPerson(person);
-        return new ResponseEntity<>(person, HttpStatus.CREATED);
+        return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Person>> searchAllPersons() {
-        List<Person> people = personService.readPersonAll();
-        return new ResponseEntity<>(people, HttpStatus.OK); // OK (200)
+    public ResponseEntity<List<Person>> readPersonAll() {
+        return new ResponseEntity<>(personService.readPersonAll(), HttpStatus.OK); // OK (200)
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> searchPersonById(@PathVariable int id) {
-        Person person = personService.readPerson(id);
-        return new ResponseEntity<>(person, HttpStatus.OK);
+    public ResponseEntity<Person> readPerson(@PathVariable int id) {
+        return new ResponseEntity<>(personService.readPerson(id), HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<Person> updatePerson(@RequestBody Person person) {
-        Person personUpdated = personService.updatePerson(person);
-        return new ResponseEntity<>(personUpdated, HttpStatus.OK);
+        return new ResponseEntity<>(personService.updatePerson(person), HttpStatus.OK);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePerson(@PathVariable(name = "id") int id) {
-        personService.deletePerson(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deletePerson(@PathVariable int id) {
+        return new ResponseEntity<>(personService.deletePerson(id), HttpStatus.NO_CONTENT);
     }
 }
 

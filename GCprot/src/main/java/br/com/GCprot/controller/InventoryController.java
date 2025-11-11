@@ -22,48 +22,48 @@ public class InventoryController {
         return new ResponseEntity<>(inventoryService.createInventory(inventory), HttpStatus.CREATED);
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     public ResponseEntity<ItemInventory> createItemInventory(@RequestBody ItemInventory item) {
         return new ResponseEntity<>(inventoryService.createItemInventory(item), HttpStatus.CREATED);
     }
 
-    @GetMapping("/list")
-    public List<Inventory> listInventoryAll() {
+    @GetMapping
+    public List<Inventory> readInventoryAll() {
         return inventoryService.readInventoryAll();
     }
 
-    @GetMapping("/item/list/")
-    public List<ItemInventory> listItemInventoryAll() {
+    @GetMapping("/itemAll/{id}")
+    public List<ItemInventory> readItemInventoryAll() {
         return inventoryService.readItemInventoryAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<Inventory> updateInventory(@RequestBody Inventory inventoryUpdate) {
         return new ResponseEntity<>(inventoryService.updateInventory(inventoryUpdate), HttpStatus.OK);
-
     }
-    @PutMapping("/item/{id}")
+
+    @PutMapping("/{id}")
     public ResponseEntity<ItemInventory> updateItemInventory(@RequestBody ItemInventory itemUpdate) {
         return new ResponseEntity<>(inventoryService.updateItemInventory(itemUpdate), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteInventory(@PathVariable(name = "id")  int id) {// Mudei o nome
+    public ResponseEntity<Boolean> deleteInventory(@PathVariable int id) {// Mudei o nome
         return new ResponseEntity<>(inventoryService.deleteInventory(id), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/item/{id}")
-    public ResponseEntity<Boolean> deleteItemInventory(@PathVariable(name = "id") int item_id) {// Mudei o nome
-        return new ResponseEntity<>(inventoryService.deleteItemInventory(item_id), HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deleteItemInventory(@PathVariable int id) {// Mudei o nome
+        return new ResponseEntity<>(inventoryService.deleteItemInventory(id), HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Inventory> readInventory(@PathVariable(name = "id")int id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Inventory> readInventory(@PathVariable int id){
         return new ResponseEntity<>(inventoryService.readInventory(id), HttpStatus.OK);
     }
 
     @GetMapping("/item/{id}")
-    public ResponseEntity<ItemInventory> readItemInventory(@PathVariable(name = "id")int item_id){
-        return new ResponseEntity<>(inventoryService.readItemInventory(item_id), HttpStatus.OK);
+    public ResponseEntity<ItemInventory> readItemInventory(@PathVariable int id){
+        return new ResponseEntity<>(inventoryService.readItemInventory(id), HttpStatus.OK);
     }
 }

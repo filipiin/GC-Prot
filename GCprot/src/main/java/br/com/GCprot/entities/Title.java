@@ -7,9 +7,13 @@ package br.com.GCprot.entities;
 
 import br.com.GCprot.enums.TypeTitle;
 import br.com.GCprot.enums.SituationTitle;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -21,10 +25,10 @@ public class Title
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private float value;
-    private Date vality; //Long ou int?
     private String description;
-    private Instant createdAt;
-    private Instant updatedAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date vality; //Long ou int?
 
     @Enumerated(EnumType.STRING)
     private SituationTitle situation;
@@ -32,18 +36,21 @@ public class Title
     @Enumerated(EnumType.STRING)
     private TypeTitle type;
 
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
+
     public Title() {
     }
 
-    public Title(int id, float value, Date vality, String description, SituationTitle situation, TypeTitle type, Instant createdAt, Instant updatedAt) {
+    public Title(int id, float value, Date vality, String description, SituationTitle situation, TypeTitle type) {
         this.id = id;
         this.value = value;
         this.vality = vality;
         this.description = description;
         this.situation = situation;
         this.type = type;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
     public int getId() {
         return id;
@@ -75,12 +82,6 @@ public class Title
     }
     public void setType(TypeTitle type){
         this.type = type;
-    }
-    public Instant getCreateAt() {
-        return createdAt;
-    }
-    public Instant getUpdatedAt() {
-        return updatedAt;
     }
 }
 

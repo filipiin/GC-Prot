@@ -13,17 +13,15 @@ public class DependentResidentService {
     @Autowired
     private DependentResidentRepository dependentResidentRepository;
 
-    public DependentResident createDependent(DependentResident newdependent) {
-        return dependentResidentRepository.save(newdependent);
+    public DependentResident createDependent(DependentResident dependent) {
+        return dependentResidentRepository.save(dependent);
     }
 
-    public DependentResident updateDependent(DependentResident dependentResident) {
-        int dependentId = dependentResident.getId();
+    public DependentResident updateDependent(DependentResident dependent) {
+        int dependentId = dependent.getId();
         DependentResident existingDependent = dependentResidentRepository.findById(dependentId)
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar usuário para atualizar"));
-        existingDependent.setClassification(dependentResident.getClassification());
-        existingDependent.setPerson(dependentResident.getPerson());
-        existingDependent.setResident(dependentResident.getResident());
+        existingDependent.setClassification(dependent.getClassification());
         return dependentResidentRepository.save(existingDependent);
     }
 

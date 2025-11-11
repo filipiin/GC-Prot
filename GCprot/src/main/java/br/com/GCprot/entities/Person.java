@@ -6,13 +6,16 @@
 
 package br.com.GCprot.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,25 +26,29 @@ public class Person
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int cpf;
-    private Date dateOfBith; //Long ou int?
+    private String cpf;
     private String name;
     private String email;
-    private Instant createdAt;
-    private Instant updatedAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date date; //Long ou int?
+
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
     public Person() {
     }
 
-    public Person(int id, int cpf, Date dateOfBith, String name, String email, Instant createdAt, Instant updatedAt) {
+    public Person(int id, String cpf, Date date, String name, String email) {
         this.id = id;
         this.cpf = cpf;
-        this.dateOfBith = dateOfBith;
+        this.date = date;
         this.name = name;
         this.email = email;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
+
     public int getId() {
         return id;
     }
@@ -51,26 +58,20 @@ public class Person
     public void setName(String name){
         this.name = name;
     }
-    public int getCpf(){
+    public String getCpf(){
         return cpf;
     }
-    public void setCpf(int cpf){ this.cpf = cpf; }
+    public void setCpf(String cpf){ this.cpf = cpf; }
     public Date getDateOfBith(){
-        return dateOfBith;
+        return date;
     }
     public void setDateOfBith(Date dateOfBith){
-        this.dateOfBith = dateOfBith;
+        this.date = dateOfBith;
     }
     public String getEmail(){
         return email;
     }
     public void setEmail(String email){
         this.email = email;
-    }
-    public Instant getCreateAt() {
-        return createdAt;
-    }
-    public Instant getUpdatedAt() {
-        return updatedAt;
     }
 }

@@ -25,6 +25,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar usuário para atualizar"));
         employee.setFunction(employeeUpdate.getFunction());
         employee.setDescription(employeeUpdate.getDescription());
+        employee.setWage(employeeUpdate.getWage());
 
         return employeeRepository.save(employee);
     }
@@ -43,7 +44,7 @@ public class EmployeeService {
         return employee;
     }
 
-    public List<Employee> readPersonAll() {
+    public List<Employee> readEmployeeAll() {
         return employeeRepository.findAll();
     }
 }
