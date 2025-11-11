@@ -1,0 +1,9 @@
+CREATE TABLE occurrence (
+  id INT NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+  vality DATE NOT NULL,
+  type VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  created_at DATETIME,
+  updated_at DATETIME
+);

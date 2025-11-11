@@ -1,6 +1,11 @@
 package br.com.GCprot.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "resident")
@@ -13,6 +18,11 @@ public class Resident {
     @OneToOne
     @JoinColumn(name = "person_id")
     private Person person;
+
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
     public Resident() {
     }

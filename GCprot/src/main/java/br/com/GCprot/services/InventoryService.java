@@ -45,7 +45,7 @@ public class InventoryService {
     }
 
     public List<Inventory> readInventoryAll() {
-        return inventoryRepository.findAll().stream().toList();
+        return inventoryRepository.findAll();
     }
 
     @Autowired

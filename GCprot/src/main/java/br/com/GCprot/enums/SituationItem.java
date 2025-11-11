@@ -6,5 +6,4 @@ public enum SituationItem {
     BOM,
     EXCELENTE,
     EM_MANUTENÇÃO,
-    ;
 }

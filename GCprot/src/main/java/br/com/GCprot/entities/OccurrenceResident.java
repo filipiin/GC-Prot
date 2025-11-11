@@ -3,9 +3,9 @@ package br.com.GCprot.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "occurrance_resident")
+@Table(name = "occurrence_resident")
 
-public class OccurranceResident {
+public class OccurrenceResident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,14 +14,14 @@ public class OccurranceResident {
     @JoinColumn(name = "resident_id")
     private Resident resident;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "title_id")
     private Occurrence occurrence;
 
-    private OccurranceResident(){
+    private OccurrenceResident(){
     }
 
-    private OccurranceResident(int id, Resident resident, Occurrence occurrence){
+    private OccurrenceResident(int id, Resident resident, Occurrence occurrence){
         this.id = id;
         this.resident = resident;
         this.occurrence = occurrence;

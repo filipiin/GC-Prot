@@ -2,10 +2,13 @@ package br.com.GCprot.entities;
 
 import br.com.GCprot.enums.TypeOccurrance;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.sql.Update;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -13,27 +16,30 @@ import java.util.Date;
 
 public class Occurrence {
     @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
-        private Date vality;
-        private String description;
-        private Instant createdAt;
-        private Instant updatedAt;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private Date vality;
+    private String description;
+    private String name;
 
-        @Enumerated(EnumType.STRING)
-        private TypeOccurrance type;
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
+
+    @Enumerated(EnumType.STRING)
+    private TypeOccurrance type;
 
 
     public Occurrence() {
     }
 
-    public Occurrence(int id, Date vality, TypeOccurrance type, String description, Instant createdAt, Instant updatedAt) {
+    public Occurrence(int id, String name, Date vality, TypeOccurrance type, String description) {
         this.id = id;
+        this.name = name;
         this.vality = vality;
         this.description = description;
         this.type = type;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
     public Integer getId() {
         return id;
@@ -44,6 +50,12 @@ public class Occurrence {
         public void setDescription(String description) {
         this.description = description;
     }
+        public String getName() {
+            return name;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
         public TypeOccurrance getType() {
             return type;
         }
@@ -53,10 +65,4 @@ public class Occurrence {
         public Date getVality() {
             return vality;
         }
-        public Instant getCreatedAt() {
-            return createdAt;
-        }
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
 }

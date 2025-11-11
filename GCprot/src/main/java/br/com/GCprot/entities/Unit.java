@@ -3,8 +3,11 @@ package br.com.GCprot.entities;
 import br.com.GCprot.enums.BlockUnit;
 import br.com.GCprot.enums.SituationUnit;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -21,25 +24,29 @@ public class Unit {
     @Enumerated(EnumType.STRING)
     private SituationUnit situation;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "resident_id")
+    private Resident resident;
+
+    @CreationTimestamp
+    private LocalDateTime created_at;
+
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
     private int num;
     private String street;
-    private Instant createdAt;
-    private Instant updatedAt;
 
     public Unit() {
     }
 
-    public Unit(int id, int num, String street, BlockUnit block, SituationUnit situation, Instant createdAt, Instant updatedAt) {
+    public Unit(int id, int num, String street, BlockUnit block, SituationUnit situation, Resident resident) {
         this.id = id;
         this.num = num;
         this.street = street;
         this.block = block;
         this.situation = situation;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.resident = resident;
     }
 
     public int getId() { return id; }
@@ -74,11 +81,10 @@ public class Unit {
         this.num = num;
     }
 
-    public Instant getCreateAt() {
-        return createdAt;
+    public Resident getResident() { return resident; }
+
+    public void seResident(Resident resident) {
+        this.resident = resident;
     }
 
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
 }

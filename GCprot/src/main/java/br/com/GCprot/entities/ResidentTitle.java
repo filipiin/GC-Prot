@@ -1,6 +1,10 @@
 package br.com.GCprot.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "resident_title")
@@ -14,15 +18,18 @@ public class ResidentTitle {
         @JoinColumn(name = "resident_id")
         private Resident resident;
 
-        @ManyToMany
+        @ManyToOne
         @JoinColumn(name = "title_id")
         private Title title;
+
 
     private ResidentTitle(){
     }
 
-    private ResidentTitle(int id){
+    private ResidentTitle(int id, Resident resident, Title title){
         this.id = id;
+        this.resident = resident;
+        this.title = title;
     }
 
     public int getId() {

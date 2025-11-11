@@ -32,6 +32,7 @@ public class ResidentService {
         return resident;
     }
 
+
     public List<Resident> readResidentAll() {
         return residentRepository.findAll();
     }

@@ -10,46 +10,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/unit")
+@RequestMapping("/api/unit")
 public class UnitController {
 
     @Autowired
     private UnitService unitService;
 
-    @PostMapping
+    @PostMapping//                                                              post(create -> {"/####"}), put(update), get(read, readll), delete(delete) ->>  postar(create), colocar(update), obter(read, readll), excluir(delete)
     public ResponseEntity<Unit> createUnit(@RequestBody Unit unit) {
-        Unit newUnit = unitService.createUnit(unit);
-        return new ResponseEntity<>(newUnit, HttpStatus.CREATED);
+        return new ResponseEntity<>(unitService.createUnit(unit), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<Unit>> readUnitAll() {
-        List<Unit> unities = unitService.readUnitAll();
-        return new ResponseEntity<>(unities, HttpStatus.OK); // OK (200)
+        return new ResponseEntity<>(unitService.readUnitAll(), HttpStatus.OK); // OK (200)
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Unit> searchUnitById(@PathVariable int id) {
-        Unit unit = unitService.readUnit(id);
-        return new ResponseEntity<>(unit, HttpStatus.OK);
+    @GetMapping("/{id}")// Os Get precisam e se tiver mais de um precisa diferencia-los EXCETO NO readAll mas read e update sim
+    public ResponseEntity<Unit> readUnit(@PathVariable int id) {
+        return new ResponseEntity<>(unitService.readUnit(id), HttpStatus.OK);
     }
 
-    // --- Endpoint de ATUALIZAÇÃO (Update) ---
-    // HTTP PUT -> http://localhost:8080/unidades
-    @PutMapping
+    @PutMapping//O Put no update não precisa de mais nada
     public ResponseEntity<Unit> updateUnit(@RequestBody Unit unit) {
-        //  @RequestBody: Pega o JSON com os dados da unidade para atualizar
-        Unit unitUpdated = unitService.updateUnit(unit);
-        return new ResponseEntity<>(unitUpdated, HttpStatus.OK);
+        return new ResponseEntity<>(unitService.updateUnit(unit), HttpStatus.OK);
     }
 
-    // --- Endpoint de DELEÇÃO (Delete) ---
-    // HTTP DELETE -> http://localhost:8080/unidades/5 (por exemplo)
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUnit(@PathVariable int id) {
-        //  @PathVariable: Pega o 'id' da URL para saber quem deletar
-        unitService.deleteUnit(id);
-        //  Para delete, não retornamos conteúdo (void) e status NO_CONTENT (204)
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deleteUnit(@PathVariable int id) {
+        return new ResponseEntity<>(unitService.deleteUnit(id), HttpStatus.NO_CONTENT);
     }
 }
