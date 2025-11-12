@@ -26,8 +26,7 @@ public class ResidentTitle {
     private ResidentTitle(){
     }
 
-    private ResidentTitle(int id, Resident resident, Title title){
-        this.id = id;
+    public ResidentTitle(Resident resident, Title title){
         this.resident = resident;
         this.title = title;
     }

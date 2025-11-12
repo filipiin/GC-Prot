@@ -15,14 +15,13 @@ public class OccurrenceResident {
     private Resident resident;
 
     @ManyToOne
-    @JoinColumn(name = "title_id")
+    @JoinColumn(name = "occurrence_id")
     private Occurrence occurrence;
 
     private OccurrenceResident(){
     }
 
-    private OccurrenceResident(int id, Resident resident, Occurrence occurrence){
-        this.id = id;
+    public OccurrenceResident( Resident resident, Occurrence occurrence){
         this.resident = resident;
         this.occurrence = occurrence;
     }
